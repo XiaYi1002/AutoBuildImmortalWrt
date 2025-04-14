@@ -99,9 +99,19 @@ uci delete ttyd.@ttyd[0].interface
 uci set dropbear.@dropbear[0].Interface=''
 uci commit
 
+# 设置默认语言为中文
+uci set luci.main.lang='zh_cn'
+uci commit luci
+# 设置时区
+uci set system.@system[0](@ref).zonename='Asia/Shanghai'
+uci commit system
+# 设置主题
+uci set argon.@theme[0](@ref).mode='light'
+uci commit argon
+
 # 设置编译作者信息
 FILE_PATH="/etc/openwrt_release"
-NEW_DESCRIPTION="Compiled by wukongdaily"
+NEW_DESCRIPTION="Compiled by 朽木"
 sed -i "s/DISTRIB_DESCRIPTION='[^']*'/DISTRIB_DESCRIPTION='$NEW_DESCRIPTION'/" "$FILE_PATH"
 
 exit 0
