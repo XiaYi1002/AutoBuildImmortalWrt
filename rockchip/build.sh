@@ -23,6 +23,7 @@ cat /home/build/immortalwrt/files/etc/config/pppoe-settings
 # 输出调试信息
 echo "$(date '+%Y-%m-%d %H:%M:%S') - Starting build process..."
 
+
 # 定义所需安装的包列表 下列插件你都可以自行删减
 PACKAGES=""
 PACKAGES="$PACKAGES curl"
@@ -55,19 +56,4 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-# 查找生成的 rootfs 文件
-ROOTFS_FILE=$(find bin/targets/ -name "*rootfs.tar.gz")
-
-if [ -z "$ROOTFS_FILE" ]; then
-    echo "$(date '+%Y-%m-%d %H:%M:%S') - Error: Rootfs file not found!"
-    exit 1
-fi
-
-# 复制 rootfs 文件到指定目录
-mkdir -p output
-cp "$ROOTFS_FILE" output/
-
-echo "$(date '+%Y-%m-%d %H:%M:%S') - Rootfs file copied to output directory."
-
 echo "$(date '+%Y-%m-%d %H:%M:%S') - Build completed successfully."
-    
